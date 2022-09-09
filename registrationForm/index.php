@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input class="form-control my-3" placeholder="phone" type="number" oninput="this.className = ''" name="mob">
         <input class="form-control my-3" placeholder="Guardian Phone" type="number" oninput="this.className = ''" name="gmob">
         <input class="form-control my-3" placeholder="Address" oninput="this.className = ''" name="address">
-        <input class="form-control my-3" placeholder="Aadhar" type="number" oninput="this.className = ''" name="aadhar">
+        <input class="form-control my-3" placeholder="Aadhar" type="number" minlength="12" oninput="this.className = ''" name="aadhar">
         <label for="exampleInputEmail1" class="my-2">Admission Fees:</label>
         <input class="form-control my-3" type="number" placeholder="SBI" oninput="this.className = ''" name="fsbi">
         <input class="form-control my-3" type="number" placeholder="CBI" oninput="this.className = ''" name="fcbi">

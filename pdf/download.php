@@ -11,8 +11,23 @@ $result = mysqli_query($conn, $sql);
 
 <?php
 if (mysqli_num_rows($result) > 0) {
-    $hmtl = '<table class="table table-striped table-bordered table-responsive">
-	<thead>
+    $hmtl = '
+    <style>
+    table,th, td{
+        font-size:15px;
+        border:1px solid black;
+        border-collapse: collapse;
+    }
+    th{
+        font-size:16px;
+    }
+    td{
+        padding:8px;
+        font-size:20px;
+    }
+    </style>
+    <table class="table">
+	
 	<tr>
 	  <th scope="col">Sl</th>
 	  <th scope="col">Roll</th>
@@ -35,11 +50,10 @@ if (mysqli_num_rows($result) > 0) {
 	  <th scope="col">Fees(SBI)</th>
 	  <th scope="col">Fees(CBI)</th>
 	</tr>
-	</thead>
-	<tbody>
-	<tr>';
+	';
     while ($row = mysqli_fetch_assoc($result)) {
-        $hmtl .= '<th scope="row">' . $row['sl'] . '</th>
+        $hmtl .= '<tr>
+        <th scope="row">' . $row['sl'] . '</th>
 		<td>' . $row['roll'] . '</td>
 		<td>' . $row['name'] . '</td>
 		<td>' . $row['gender'] . '</td>
@@ -62,9 +76,7 @@ if (mysqli_num_rows($result) > 0) {
 		</tr>
 		';
     }
-    $hmtl .= '
-	</tbody>
-	</table>';
+    $hmtl .= '</table>';
 
 
 } else {
@@ -75,7 +87,7 @@ $dompdf = new Dompdf\Dompdf();
 $dompdf->loadHtml($hmtl);
 
 // (Optional) Setup the paper size and orientation
-$dompdf->setPaper('A2', 'portrait');
+$dompdf->setPaper('A2', 'landscape');
 
 // Render the HTML as PDF
 $dompdf->render();

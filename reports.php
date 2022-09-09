@@ -12,7 +12,7 @@
   <body>
       <h1 class="text-center">Generate reports of student registration</h1>
       <div class="container my-5">1.
-        <em>Generate reports of all students----> </em><a href="/registration/pdf/" class="btn btn-primary">Export to PDF</a>
+        <em>Generate reports of all students----> </em><a href="/registration/pdf/" class="btn btn-primary">Preview Report</a>
       </div>
       <div class="form-group container">
         <form action="" method="POST">
