@@ -1,10 +1,19 @@
 <?php
-include "../parts/_dbconnect.php";
+include '../parts/_dbconnect.php';
+require 'vendor/autoload.php';
+
 // require ("vendor/autoload.php");
 $sql = "SELECT * FROM `registration`";
 $result = mysqli_query($conn, $sql);
 
-		// $mpdf =  new \Mpdf\Mpdf();
+
+if(array_key_exists('download', $_POST)) {
+	download();
+}
+
+// $mpdf =  new \Mpdf\Mpdf();
+// if (array_key_exists(""))
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,10 +27,17 @@ $result = mysqli_query($conn, $sql);
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-  <table class="table table-striped table-bordered table-responsive">
+  <div class="text-center my-2 ">
+	<!-- <form method="POST">
+	<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="download" readonly></input>
+	</form> -->
+	<a href="download.php" class="btn btn-primary">Donwload All</a>
+</div>
+  
 	  <?php
 if (mysqli_num_rows($result) > 0) {
-	$hmtl = '<thead>
+	$hmtl = '<table class="table table-striped table-bordered table-responsive">
+	<thead>
 	<tr>
 	  <th scope="col">Sl</th>
 	  <th scope="col">Roll</th>
@@ -71,6 +87,9 @@ if (mysqli_num_rows($result) > 0) {
 		</tr>
 		';
 	}
+	$hmtl.='</tr>
+	</tbody>
+	</table>';
 	// $mpdf->WriteHTML($hmtl);
 	// $file = time() . ".pdf";
 	// $mpdf->output($file, 'D');
@@ -78,11 +97,30 @@ if (mysqli_num_rows($result) > 0) {
 	echo "<h1>No Data Found</h1>";
 	exit();
 }
+
 echo $hmtl;
+
+
+function download(){
+	global $hmtl;
+	// reference the Dompdf namespace
+// instantiate and use the dompdf class
+	$dompdf = new Dompdf\Dompdf();
+	$dompdf->loadHtml($hmtl);
+
+	// (Optional) Setup the paper size and orientation
+	$dompdf->setPaper('A4', 'portrait');
+
+	// Render the HTML as PDF
+	$dompdf->render();
+
+	//file name
+	$file=time().".pdf";
+	// Output the generated PDF to Browser
+	$dompdf->stream($file);
+}
+
 ?>
-</tr>
-</tbody>
-</table>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
