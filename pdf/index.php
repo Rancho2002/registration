@@ -26,34 +26,39 @@ $sl = 1;
 
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		echo '<div class="text-center my-2 ">
-		<!-- <form method="POST">
-	<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="download" readonly></input>
-	</form> -->
-		<a href="specific.php" class="btn btn-primary">Donwload All</a>
-	</div>';
+		
 		$dept=$_POST['dept'];
 		$ocat=$_POST['ocat'];
 		$gender=$_POST['gender'];
 
-		if($ocat=="all" && $gender="all"){
+		if($ocat=="all" && $gender=="all"){
 			$specSql="SELECT * FROM `registration` where `dept`='$dept'";
 			$res=mysqli_query($conn,$specSql);
+			echo $ocat, $gender, $dept, "1";
 			}
 		else if($ocat=="all"){
 			$specSql="SELECT * FROM `registration` where `dept`='$dept' and `gender`='$gender'";
 			$res=mysqli_query($conn,$specSql);
+			echo $ocat, $gender, $dept, "2";
 		}
 		else if($gender=="all"){
 			$specSql="SELECT * FROM `registration` where `dept`='$dept' and `ocat`='$ocat'";
 			$res=mysqli_query($conn,$specSql);
+			echo $ocat, $gender, $dept, "3";
 		}
 		else{
 			$specSql="SELECT * FROM `registration` where `dept`='$dept' and `gender`='$gender' and `ocat`='$ocat'";
 			$res=mysqli_query($conn,$specSql);
+			echo $ocat, $gender, $dept, "4";
 		}
 
 		if (mysqli_num_rows($res) > 0) {
+			echo '<div class="text-center my-2 ">
+	 <form method="POST">
+	<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="Download" readonly></input>
+	</form>
+	<!--	<a href="specific.php" class="btn btn-primary">Donwload All</a>-->
+	</div>';
 			echo '<h1 class="my-1">Total number of registration: ' . mysqli_num_rows($res) . '</h1>';
 			$hmtl = '<table class="table table-striped table-bordered table-responsive">
 	<thead>
@@ -118,6 +123,29 @@ $sl = 1;
 			exit();
 		}
 		echo $hmtl;
+		if(array_key_exists('download', $_POST)) {
+            download();
+        }
+
+		function download()
+		{
+			global $hmtl;
+			// reference the Dompdf namespace
+			// instantiate and use the dompdf class
+			$dompdf = new Dompdf\Dompdf();
+			$dompdf->loadHtml($hmtl);
+
+			// (Optional) Setup the paper size and orientation
+			$dompdf->setPaper('A4', 'portrait');
+
+			// Render the HTML as PDF
+			$dompdf->render();
+
+			//file name
+			$file = time() . ".pdf";
+			// Output the generated PDF to Browser
+			$dompdf->stream($file);
+		}
 	
 	} else {
 		echo '<div class="text-center my-2 ">
@@ -184,6 +212,25 @@ $sl = 1;
 			$hmtl .= '</tr>
 	</tbody>
 	</table>';
+	function download()
+		{
+			global $hmtl;
+			// reference the Dompdf namespace
+			// instantiate and use the dompdf class
+			$dompdf = new Dompdf\Dompdf();
+			$dompdf->loadHtml($hmtl);
+
+			// (Optional) Setup the paper size and orientation
+			$dompdf->setPaper('A4', 'portrait');
+
+			// Render the HTML as PDF
+			$dompdf->render();
+
+			//file name
+			$file = time() . ".pdf";
+			// Output the generated PDF to Browser
+			$dompdf->stream($file);
+		}
 			// $mpdf->WriteHTML($hmtl);
 			// $file = time() . ".pdf";
 			// $mpdf->output($file, 'D');
