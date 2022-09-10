@@ -62,7 +62,7 @@ session_start();
         </select>
         </div>
         <div class="text-center mt-4">
-        <button type="submit" class="my-2 btn btn-primary btn-lg">Preview</button>
+        <button type="submit" class="my-2 btn btn-primary btn-lg">Preview & download</button>
         </div>
       </form>
     </div>

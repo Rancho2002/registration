@@ -34,31 +34,47 @@ $sl = 1;
 		if($ocat=="all" && $gender=="all"){
 			$specSql="SELECT * FROM `registration` where `dept`='$dept'";
 			$res=mysqli_query($conn,$specSql);
-			echo $ocat, $gender, $dept, "1";
+		echo '<div class="text-center my-2 ">
+		<form method="POST" action="specific.php/?dept='.$dept.'">
+		<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="Download" readonly></input>
+		</form> 
+		<!--<a href="specific.php" class="btn btn-primary">Donwload All</a> -->
+		</div>';
+			// echo $ocat, $gender, $dept, "1";
 			}
 		else if($ocat=="all"){
 			$specSql="SELECT * FROM `registration` where `dept`='$dept' and `gender`='$gender'";
 			$res=mysqli_query($conn,$specSql);
-			echo $ocat, $gender, $dept, "2";
+			echo '<div class="text-center my-2 ">
+		<form method="POST" action="specific.php/?dept='.$dept.'&gender='.$gender.'">
+		<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="Download" readonly></input>
+		</form> 
+		</div>';
+			// echo $ocat, $gender, $dept, "2";
 		}
 		else if($gender=="all"){
 			$specSql="SELECT * FROM `registration` where `dept`='$dept' and `ocat`='$ocat'";
 			$res=mysqli_query($conn,$specSql);
-			echo $ocat, $gender, $dept, "3";
+			echo '<div class="text-center my-2 ">
+		<form method="POST" action="specific.php/?dept='.$dept.'&ocat='.$ocat.'">
+		<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="Download" readonly></input>
+		</form> 
+		</div>';
+			// echo $ocat, $gender, $dept, "3";
 		}
 		else{
 			$specSql="SELECT * FROM `registration` where `dept`='$dept' and `gender`='$gender' and `ocat`='$ocat'";
 			$res=mysqli_query($conn,$specSql);
-			echo $ocat, $gender, $dept, "4";
+			echo '<div class="text-center my-2 ">
+		<form method="POST" action="specific.php/?dept='.$dept.'&ocat='.$ocat.'&gender='.$gender.'">
+		<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="Download" readonly></input>
+		</form> 
+		</div>';
+			// echo $ocat, $gender, $dept, "4";
 		}
 
 		if (mysqli_num_rows($res) > 0) {
-			echo '<div class="text-center my-2 ">
-	 <form method="POST">
-	<input class="btn btn-primary text-white" type="submit" style="cursor:pointer;" name="download" value="Download" readonly></input>
-	</form>
-	<!--	<a href="specific.php" class="btn btn-primary">Donwload All</a>-->
-	</div>';
+			
 			echo '<h1 class="my-1">Total number of registration: ' . mysqli_num_rows($res) . '</h1>';
 			$hmtl = '<table class="table table-striped table-bordered table-responsive">
 	<thead>
@@ -87,7 +103,7 @@ $sl = 1;
 	</thead>
 	<tbody>
 	<tr>';
-			while ($row = mysqli_fetch_assoc($res)) {
+	while ($row = mysqli_fetch_assoc($res)) {
 				$hmtl .= '<th scope="row">' . $sl . '</th>
 		<td>' . $row['roll'] . '</td>
 		<td>' . $row['name'] . '</td>
@@ -123,29 +139,29 @@ $sl = 1;
 			exit();
 		}
 		echo $hmtl;
-		if(array_key_exists('download', $_POST)) {
-            download();
-        }
+		// if(array_key_exists('download', $_POST)) {
+        //     download();
+        // }
 
-		function download()
-		{
-			global $hmtl;
+		// function download()
+		// {
+		// 	global $hmtl;
 			// reference the Dompdf namespace
 			// instantiate and use the dompdf class
-			$dompdf = new Dompdf\Dompdf();
-			$dompdf->loadHtml($hmtl);
+			// $dompdf = new Dompdf\Dompdf();
+			// $dompdf->loadHtml($hmtl);
 
-			// (Optional) Setup the paper size and orientation
-			$dompdf->setPaper('A4', 'portrait');
+			// // (Optional) Setup the paper size and orientation
+			// $dompdf->setPaper('A4', 'portrait');
 
-			// Render the HTML as PDF
-			$dompdf->render();
+			// // Render the HTML as PDF
+			// $dompdf->render();
 
-			//file name
-			$file = time() . ".pdf";
-			// Output the generated PDF to Browser
-			$dompdf->stream($file);
-		}
+			// //file name
+			// $file = time() . ".pdf";
+			// // Output the generated PDF to Browser
+			// $dompdf->stream($file);
+		// }
 	
 	} else {
 		echo '<div class="text-center my-2 ">

@@ -3,9 +3,30 @@
 include '../parts/_dbconnect.php';
 require 'vendor/autoload.php';
 
-// require ("vendor/autoload.php");
-$sql = "SELECT * FROM `registration`";
+if(isset($_GET['dept'])){
+$deptS=$_GET['dept'];
+$sql = "SELECT * FROM `registration` where `dept`='$deptS'";
 $result = mysqli_query($conn, $sql);
+}
+if(isset($_GET['dept']) && isset($_GET['gender'])){
+	$deptS=$_GET['dept'];
+	$genderS=$_GET['gender'];
+	$sql = "SELECT * FROM `registration` where `dept`='$deptS' and `gender`='$genderS'";
+	$result = mysqli_query($conn, $sql);
+}
+if(isset($_GET['dept']) && isset($_GET['ocat'])){
+	$deptS=$_GET['dept'];
+	$ocatS=$_GET['ocat'];
+	$sql = "SELECT * FROM `registration` where `dept`='$deptS' and `ocat`='$ocatS'";
+	$result = mysqli_query($conn, $sql);
+}
+if(isset($_GET['dept']) && isset($_GET['ocat']) && isset($_GET['gender'])){
+	$deptS=$_GET['dept'];
+	$ocatS=$_GET['ocat'];
+	$genderS=$_GET['gender'];
+	$sql = "SELECT * FROM `registration` where `dept`='$deptS' and `ocat`='$ocatS' and `gender`='$genderS'";
+	$result = mysqli_query($conn, $sql);
+}
 $sl=1;
 ?>
 
