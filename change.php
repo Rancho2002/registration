@@ -1,12 +1,13 @@
 <?php
-$user=$_GET['user']
+$user=$_GET['user'];
+session_start();
 ?>
 
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Verify OTP</title>
+  <title>Change Password</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,7 +26,9 @@ $user=$_GET['user']
 </style>
 
 <body class="bg-secondary">
-
+<?php
+ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+  echo '
   <div class="container bg-dark w-100 p-2 pb-5 mt-5">
     <div class="p-2">
       <h3 class="text-center text-white display-4">Change Password</h3>
@@ -42,8 +45,12 @@ $user=$_GET['user']
 
       </form>
     </div>
-  </div>
-
+  </div>';
+ }
+ else{
+  header("location: /registration/index.php/?status=notlogin");
+ }
+?>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
