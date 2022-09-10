@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,6 +13,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    <?php
+    if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+      echo '
       <h1 class="text-center">Generate reports of student registration</h1>
       <div class="container my-5">1.
         <em>Generate reports of all students----> </em><a href="/registration/pdf/" class="btn btn-primary">Preview Report</a>
@@ -26,7 +32,12 @@
         </select>
         <button type="button" class="my-2 btn btn-primary">Export</button>
       </form>
-    </div>
+    </div>';
+    }
+    else{
+      header("location: /registration/index.php/?status=notlogin");
+    }
+    ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
