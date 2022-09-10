@@ -106,7 +106,7 @@ session_start();
           if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
             echo '<a href="/registration/registrationForm/" class="btn btn-primary p-3 fw-bold">Insert Data</a>';
           } else {
-            echo '<a href="/registration/registrationForm/" class="btn btn-primary p-3 fw-bold disabled">Insert Data</a>';
+            echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login">Login First</button>';
           }
           ?>
 

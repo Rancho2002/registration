@@ -1,4 +1,5 @@
 <?php
+
 include '../parts/_dbconnect.php';
 require 'vendor/autoload.php';
 
@@ -98,3 +99,4 @@ $dompdf->render();
 $file = time() . ".pdf";
 // Output the generated PDF to Browser
 $dompdf->stream($file);
+

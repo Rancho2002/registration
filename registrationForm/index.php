@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include "../parts/_dbconnect.php";
   $gender = $_POST['gender'];
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($result) {
     // header("location: /registration/registrationForm/");
-    echo "<h1 class='text-white'>Data Inserted Successfully!</h1>";
+    echo '<h1 class="text-white">Data Inserted Successfully! <a href="/registration/reports.php/" class="btn btn-primary ml-1">Go To Reports</a></h1>';
   }
 }
 ?>
@@ -51,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body class="bg-secondary">
+  <?php
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+
+  echo '
   <form id="regForm" action="" method="POST" class="bg-dark text-white container-fluid">
 
     <h1 class="text-center">Student Registration</h1>
@@ -60,37 +65,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div class="tab">
 
         <label for="name">Name</label>
-        <input class="form-control my-1" placeholder="Name" name="name" oninput="this.className = ''">
+        <input class="form-control my-1" placeholder="Name" name="name" oninput="this.className = \'\'">
         <label for="Provisional Roll No" class="my-1">Provisional Roll No</label>
-        <input class="form-control my-1" type="number" name="roll" placeholder="Provisional Roll No" oninput="this.className = ''">
+        <input class="form-control my-1" type="number" name="roll" placeholder="Provisional Roll No" oninput="this.className = \'\'">
 
 
 
         <label for="department" class="my-1">Gender</label>
         <select class="custom-select form-control my-1" id="gender" name="gender" required>
           <option selected disabled>Choose...</option>
-          <option value="M" oninput="this.className = ''">M</option>
-          <option value="F" oninput="this.className = ''">F</option>
+          <option value="M" oninput="this.className = \'\'">M</option>
+          <option value="F" oninput="this.className = \'\'">F</option>
         </select>
 
         <label for="department" class="my-1">Department</label>
         <select class="custom-select form-control my-1" id="dept" name="dept" required>
           <option selected disabled>Choose...</option>
-          <option value="CSE" oninput="this.className = ''">CSE</option>
-          <option value="ECE" oninput="this.className = ''">ECE</option>
-          <option value="ME" oninput="this.className = ''">ME</option>
-          <option value="EE" oninput="this.className = ''">EE</option>
-          <option value="CE" oninput="this.className = ''">CE</option>
+          <option value="CSE" oninput="this.className = \'\'">CSE</option>
+          <option value="ECE" oninput="this.className = \'\'">ECE</option>
+          <option value="ME" oninput="this.className = \'\'">ME</option>
+          <option value="EE" oninput="this.className = \'\'">EE</option>
+          <option value="CE" oninput="this.className = \'\'">CE</option>
         </select>
 
-        <label for="father name" class="my-1">Father's Name</label>
-        <input class="form-control my-1" placeholder="Father's Name" name="fname" oninput="this.className = ''">
+        <label for="father name" class="my-1">Father\'s Name</label>
+        <input class="form-control my-1" placeholder="Father\'s Name" name="fname" oninput="this.className = \'\'">
 
-        <label for="mother name" class="my-1">Mother's Name</label>
-        <input class="form-control my-1" placeholder="Mother's Name" name="mname" oninput="this.className = ''">
+        <label for="mother name" class="my-1">Mother\'s Name</label>
+        <input class="form-control my-1" placeholder="Mother\'s Name" name="mname" oninput="this.className = \'\'">
 
         <label for="date of birth" class="my-1">Date of Birth</label>
-        <input class="form-control my-1" type="date" placeholder="Date of birth" name="dob" oninput="this.className = ''">
+        <input class="form-control my-1" type="date" placeholder="Date of birth" name="dob" oninput="this.className = \'\'">
 
 
 
@@ -100,58 +105,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="alloted category" class="my-1">Alloted Category</label>
         <select class="custom-select form-control my-1" id="acat" name="acat">
           <option selected disabled>Choose...</option>
-          <option value="GEN" oninput="this.className = ''">GEN</option>
-          <option value="SC" oninput="this.className = ''">SC</option>
-          <option value="ST" oninput="this.className = ''">ST</option>
-          <option value="OBC-A" oninput="this.className = ''">OBC-A</option>
-          <option value="OBC-B" oninput="this.className = ''">OBC-B</option>
+          <option value="GEN" oninput="this.className = \'\'">GEN</option>
+          <option value="SC" oninput="this.className = \'\'">SC</option>
+          <option value="ST" oninput="this.className = \'\'">ST</option>
+          <option value="OBC-A" oninput="this.className = \'\'">OBC-A</option>
+          <option value="OBC-B" oninput="this.className = \'\'">OBC-B</option>
+          <option value="TFW" oninput="this.className = \'\'">TFW</option>
+          <option value="ARMY" oninput="this.className = \'\'">ARMY</option>
         </select>
 
         <label for="original category" class="my-1">Original Category</label>
         <select class="custom-select form-control my-1" id="ocat" name="ocat">
           <option selected disabled>Choose...</option>
-          <option value="GEN" oninput="this.className = ''">GEN</option>
-          <option value="SC" oninput="this.className = ''">SC</option>
-          <option value="ST" oninput="this.className = ''">ST</option>
-          <option value="OBC-A" oninput="this.className = ''">OBC-A</option>
-          <option value="OBC-B" oninput="this.className = ''">OBC-B</option>
+          <option value="GEN" oninput="this.className = \'\'">GEN</option>
+          <option value="SC" oninput="this.className = \'\'">SC</option>
+          <option value="ST" oninput="this.className = \'\'">ST</option>
+          <option value="OBC-A" oninput="this.className = \'\'">OBC-A</option>
+          <option value="OBC-B" oninput="this.className = \'\'">OBC-B</option>
         </select>
         <label for="alloted rank" class="my-1">Alloted Rank</label>
-        <input class="form-control my-1" type="number" placeholder="Alloted Rank" oninput="this.className = ''" name="alotrank">
+        <input class="form-control my-1" type="number" placeholder="Alloted Rank" oninput="this.className = \'\'" name="alotrank">
         <label for="gmr" class="my-1">General Merit Rank</label>
-        <input class="form-control my-1" type="number" placeholder="General Merit Rank" oninput="this.className = ''" name="gmr">
+        <input class="form-control my-1" type="number" placeholder="General Merit Rank" oninput="this.className = \'\'" name="gmr">
         <!-- <label for="date of admission" class="my-1">Date of Admission</label> -->
       </div>
 
       <div class="tab">
         <label for="contact info" class="my-2">Contact Info:</label>
-        <input class="form-control my-3" type="email" placeholder="Email" oninput="this.className = ''" name="mail">
-        <input class="form-control my-3" placeholder="phone" type="number" oninput="this.className = ''" name="mob">
-        <input class="form-control my-3" placeholder="Guardian Phone" type="number" oninput="this.className = ''" name="gmob">
-        <input class="form-control my-3" placeholder="Address" oninput="this.className = ''" name="address">
-        <input class="form-control my-3" placeholder="Aadhar" type="number" minlength="12" oninput="this.className = ''" name="aadhar">
+        <input class="form-control my-3" type="email" placeholder="Email" oninput="this.className = \'\'" name="mail">
+        <input class="form-control my-3" placeholder="phone" type="number" oninput="this.className = \'\'" name="mob">
+        <input class="form-control my-3" placeholder="Guardian Phone" type="number" oninput="this.className = \'\'" name="gmob">
+        <input class="form-control my-3" placeholder="Address" oninput="this.className = \'\'" name="address">
+        <input class="form-control my-3" placeholder="Aadhar" type="number" minlength="12" oninput="this.className = \'\'" name="aadhar">
         <label for="exampleInputEmail1" class="my-2">Admission Fees:</label>
-        <input class="form-control my-3" type="number" placeholder="SBI" oninput="this.className = ''" name="fsbi">
-        <input class="form-control my-3" type="number" placeholder="CBI" oninput="this.className = ''" name="fcbi">
+        <input class="form-control my-3" type="number" placeholder="SBI" oninput="this.className = \'\'" name="fsbi">
+        <input class="form-control my-3" type="number" placeholder="CBI" oninput="this.className = \'\'" name="fcbi">
       </div>
 
 
 
       <!-- <div class="tab">
         <label for="exampleInputEmail1" class="my-2">Admission Fees:</label>
-        <input class="form-control my-3" type="number" placeholder="SBI" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="CBI" oninput="this.className = ''">
+        <input class="form-control my-3" type="number" placeholder="SBI" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="CBI" oninput="this.className = \'\'">
         <label for="exampleInputEmail1" class="my-2">Semester Fees:</label>
-        <input class="form-control my-3" type="number" placeholder="1st sem" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="2nd sem" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="3rd sem" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="4th sem" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="5th sem" oninput="this.className = ''">
+        <input class="form-control my-3" type="number" placeholder="1st sem" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="2nd sem" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="3rd sem" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="4th sem" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="5th sem" oninput="this.className = \'\'">
       </div>
       <div class="tab">
-        <input class="form-control my-3" type="number" placeholder="6th sem" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="7th sem" oninput="this.className = ''">
-        <input class="form-control my-3" type="number" placeholder="8th sem" oninput="this.className = ''">
+        <input class="form-control my-3" type="number" placeholder="6th sem" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="7th sem" oninput="this.className = \'\'">
+        <input class="form-control my-3" type="number" placeholder="8th sem" oninput="this.className = \'\'">
       </div> -->
       <div style="overflow:auto;">
         <div style="float:right;">
@@ -169,8 +176,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
 
   </form>
-  </div>
-
+  </div>';
+}
+else{
+  header("location: /registration/index.php/?status=notlogin");
+}
+?>
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
