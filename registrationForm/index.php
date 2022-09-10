@@ -179,7 +179,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
   </div>';
 }
 else{
-  header("location: /registration/index.php/?status=notlogin");
+  header("location: /registration/teacher.php/?status=notlogin");
 }
 ?>
   <!-- Optional JavaScript; choose one of the two! -->

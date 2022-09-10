@@ -48,7 +48,7 @@ session_start();
   </div>';
  }
  else{
-  header("location: /registration/index.php/?status=notlogin");
+  header("location: /registration/teacher.php/?status=notlogin");
  }
 ?>
   <!-- Optional JavaScript -->
