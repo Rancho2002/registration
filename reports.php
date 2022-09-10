@@ -37,7 +37,7 @@ session_start();
         <form action="/registration/pdf/" method="POST" class="border border-primary p-2" >
           <p class="w-100 d-flex justify-content-between font-weight-bold text-success" style="font-size: 20px;">>> Generate reports by specific fields:</p>
           <div class="d-flex justify-content-between align-items-center custom">
-        <label for="" class="mr-1">Department</label>
+        <label for="dept" class="mr-1">Department</label>
         <select class="select form-control w-25 d-inline" name="dept" id="dept">
           <option value="CSE">CSE</option>
           <option value="ECE">ECE</option>
@@ -45,13 +45,13 @@ session_start();
           <option value="EE">EE</option>
           <option value="CE">CE</option>
         </select>
-        <label for="" class="ml-2 mr-1">Gender</label>
+        <label for="gender" class="ml-2 mr-1">Gender</label>
         <select class="select form-control w-25 d-inline" name="gender" id="gender">
           <option value="all">All</option>
           <option value="M">M</option>
           <option value="F">F</option>
         </select>
-        <label for="" class="ml-2 mr-1">Category(Original)</label>
+        <label for="cat" class="ml-2 mr-1">Category(Original)</label>
         <select class="select form-control d-inline" style="width: 24%;" name="ocat" id="ocat">
           <option value="all">All</option>
           <option value="GEN">GEN</option>
@@ -66,7 +66,7 @@ session_start();
         </div>
       </form>
     </div>
-    // ';
+     ';
     }
     else{
       header("location: /registration/teacher.php/?status=notlogin");
