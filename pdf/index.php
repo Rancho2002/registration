@@ -258,25 +258,25 @@ $sl = 1;
 		echo $hmtl;
 
 
-		function download()
-		{
-			global $hmtl;
-			// reference the Dompdf namespace
-			// instantiate and use the dompdf class
-			$dompdf = new Dompdf\Dompdf();
-			$dompdf->loadHtml($hmtl);
+		// function download()
+		// {
+		// 	global $hmtl;
+		// 	// reference the Dompdf namespace
+		// 	// instantiate and use the dompdf class
+		// 	$dompdf = new Dompdf\Dompdf();
+		// 	$dompdf->loadHtml($hmtl);
 
-			// (Optional) Setup the paper size and orientation
-			$dompdf->setPaper('A4', 'portrait');
+		// 	// (Optional) Setup the paper size and orientation
+		// 	$dompdf->setPaper('A4', 'portrait');
 
-			// Render the HTML as PDF
-			$dompdf->render();
+		// 	// Render the HTML as PDF
+		// 	$dompdf->render();
 
-			//file name
-			$file = time() . ".pdf";
-			// Output the generated PDF to Browser
-			$dompdf->stream($file);
-		}
+		// 	//file name
+		// 	$file = time() . ".pdf";
+		// 	// Output the generated PDF to Browser
+		// 	$dompdf->stream($file);
+		// }
 	}
 	?>
 	<!-- Optional JavaScript -->
