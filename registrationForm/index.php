@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Kolkata');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include "../parts/_dbconnect.php";
   $gender = $_POST['gender'];
@@ -23,8 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $fsbi = $_POST['fsbi'];
   $fcbi = $_POST['fcbi'];
 
+  $date=date('Y-m-d H:i:s');
+
   $newRoll = '350/' . date("Y") . '/' . $dept . '/' . $roll;
-  $sql = "INSERT INTO `registration` (`roll`, `name`,`gender`, `dept`, `fname`, `mname`, `acat`, `ocat`, `dob`, `alotrank`, `gmr`, `doa`, `mob`, `gmob`, `address`, `aadhar`, `mail`, `fsbi`, `fcbi`) VALUES ( '$newRoll', '$name', '$gender','$dept', '$fname', '$mname', '$acat', '$ocat', '$dob', '$alotrank', '$gmr', current_timestamp(), '$mob', '$gmob', '$address', '$aadhar', '$mail', '$fsbi', '$fcbi')";
+  $sql = "INSERT INTO `registration` (`roll`, `name`,`gender`, `dept`, `fname`, `mname`, `acat`, `ocat`, `dob`, `alotrank`, `gmr`, `doa`, `mob`, `gmob`, `address`, `aadhar`, `mail`, `fsbi`, `fcbi`) VALUES ( '$newRoll', '$name', '$gender','$dept', '$fname', '$mname', '$acat', '$ocat', '$dob', '$alotrank', '$gmr', '$date', '$mob', '$gmob', '$address', '$aadhar', '$mail', '$fsbi', '$fcbi')";
 
   $result = mysqli_query($conn, $sql);
 

@@ -21,8 +21,8 @@
   
   /* Mark input boxes that gets an error on validation: */
   input.invalid {
-    background-color: #bdbdbd;
-    /* border: 2px solid rgb(226, 63, 63); */
+    /* background-color: #dcdcdc; */
+    border: 2px solid rgb(226, 63, 63);
   }
   
   /* Hide all steps by default: */

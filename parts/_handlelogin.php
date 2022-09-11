@@ -16,17 +16,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
         $row=mysqli_fetch_assoc($result1);
         if($pass==password_verify($pass,$row['password'])){
+        // if($pass==$row['password']){
             session_start();
             $_SESSION['loggedin']=true;
             $_SESSION['username']=$user;     
-            header("location: /registration/teacher.php/?user=".$user);     
+            header("location: /registration/teacher.php/?user=".$user."&login=true");     
         }
         else{
-            header("location: /registration/teacher.php/?pass=wrong");  
+            header("location: /registration/teacher.php/?login=wrong");  
         }
     }
     else{
-        header("location: /registration/teacher.php/?exist=false");
+        header("location: /registration/teacher.php/?login=wrong");
     }
 }
 

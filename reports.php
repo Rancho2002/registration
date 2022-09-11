@@ -67,6 +67,7 @@ session_start();
       </form>
     </div>
      ';
+     
     }
     else{
       header("location: /registration/teacher.php/?status=notlogin");

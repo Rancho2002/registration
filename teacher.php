@@ -16,6 +16,7 @@ session_start();
 </head>
 
 <body>
+ 
   <section class="header">
     <nav>
       <div class="nav-links">
@@ -26,12 +27,16 @@ session_start();
           <li>
             <?php
             if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-              echo '<p class="text-white mr-2" style="font-size:50px">Welcome ' . strtoupper($_SESSION['username']) . '</p>
+              echo '<p class="text-white mr-2" style="font-size:40px">Welcome ' . strtoupper($_SESSION['username']) . '</p>
               <a href="/registration/change.php/?user='.$_SESSION["username"].'" class="btn btn-primary mt-3">Change Password</a>
               <a href="/registration/reports.php" class="btn btn-primary mt-3">Generate Report</a>
               <a href="/registration/parts/_logout.php" class="btn btn-primary mt-3">Logout</a>
               ';
-            } else {
+              
+            } 
+           
+            
+            else {
               echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login">Log in</button>';
             }
             ?>
@@ -40,7 +45,29 @@ session_start();
         </ul>
       </div>
     </nav>
-
+    <?php
+if(isset($_GET['pass'])){
+  $status=$_GET['pass'];
+  if($status=='changed'){
+    echo '<div class="alert alert-success alert-dismissible" role="alert">
+    Password Changed Successfully.
+  </div>';
+  }
+}
+if(isset($_GET['login'])){
+  $status=$_GET['login'];
+  if($status=='true'){
+    echo '<div class="alert alert-success alert-dismissible" role="alert">
+    Logged in successfully.
+  </div>';
+  }
+  else if($status=='wrong'){
+    echo '<div class="alert alert-warning alert-dismissible" role="alert">
+    Invalid Credentials!!
+  </div>';
+  }
+}
+  ?>
     <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -68,23 +95,21 @@ session_start();
         </div>
       </div>
     </div>
-
+<?php
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+  echo '<div class="alert alert-danger" role="alert font-weight-bolder" id="intro">
+  It is recommended to change password at least once. <span style="font-weight:700;">Ignore if already changed.</span>
+</div>';
+}
+?>
 
     <div class="text-box">
-      <h1>RAMKRISHNA MAHATO GOVERNMENT ENGINEERING COLLEGE</h1>
-      <p class="my-5">
+      <h1 class="text-warning" style="font-size: 45px;">RAMKRISHNA MAHATO GOVERNMENT ENGINEERING COLLEGE</h1>
+      <h3 class="my-5">
         <em>
-          Inaugurated in the year of 2016, Ramkrishna Mahato Government
-          Engineering College (Formerly known as Purulia Government Engineering
-          College) is fully funded by the Government of West Bengal and is
-          approved by AICTE. Affiliated to MAKAUT (formerly known as WBUT), the
-          college at its nascent stage comprises five academic departments like
-          Electronics & Communication Engineering, Computer Science &
-          Engineering, Electrical Engineering, Civil Engineering, and Mechanical
-          Engineering, and is well equipped with state of arts laboratories and
-          workshops. Situated at Agharpur, 20 km away from Purulia town.
+        The fresh application of 2022 has started! Click below to get the form.
         </em>
-      </p>
+      </h3>
 
       <div class="card text-center my-5">
         <div class="card-body">
@@ -117,7 +142,11 @@ session_start();
   
 
   </section>
-
+          <script>
+            setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+  }, 5000);
+          </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 

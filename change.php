@@ -28,6 +28,23 @@ session_start();
 <body class="bg-secondary">
 <?php
  if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+
+  if(isset($_GET['pass'])){
+    $status=$_GET['pass'];
+    if($status=='wrong'){
+      echo '<div class="alert alert-danger" role="alert">
+      Old password does not match.
+    </div>';
+    }
+    else if($status=='notsame'){
+      echo '<div class="alert alert-danger" role="alert">
+      New password and confirm password are not same.
+    </div>';
+    }
+  }
+
+
+
   echo '
   <div class="container bg-dark w-100 p-2 pb-5 mt-5">
     <div class="p-2">
@@ -35,7 +52,8 @@ session_start();
       <form action="/registration/parts/_change.php" method="POST" class="text-white">
         <div class="form-group text-center">
           <!-- <label for="">Email address</label> -->
-          <input type="hidden" name="user" value="<?php echo $user ?>">
+          <input type="hidden" name="user" value="'.$user.'">
+          <input type="password" class="form-control p-4 my-4 w-50 d-block mx-auto text-center" id="opass" name="opass" aria-describedby="emailHelp" placeholder="Old Password">
           <input type="password" class="form-control p-4 my-4 w-50 d-block mx-auto text-center" id="password" name="password" aria-describedby="emailHelp" placeholder="New Password">
           <input type="password" class="form-control p-4 my-4 w-50 d-block mx-auto text-center" id="cpass" name="cpass" aria-describedby="emailHelp" placeholder="Confirm Password">
         </div>
