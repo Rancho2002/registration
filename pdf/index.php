@@ -179,12 +179,14 @@ $sl = 1;
 	  <th scope="col">Sl</th>
 	  <th scope="col">Roll</th>
 	  <th scope="col">Name</th>
+	  <th scope="col">Year</th>
 	  <th scope="col">Gender</th>
 	  <th scope="col">Dept.</th>
 	  <th scope="col">Father\'s Name</th>
 	  <th scope="col">Mother\'s Name</th>
 	  <th scope="col">Alloted Category</th>
 	  <th scope="col">Original Category</th>
+	  <th scope="col">Domicile</th>
 	  <th scope="col">Date of Birth</th>
 	  <th scope="col">Alloted Rank</th>
 	  <th scope="col">GMR</th>
@@ -204,12 +206,14 @@ $sl = 1;
 				$hmtl .= '<th scope="row">' . $sl . '</th>
 		<td>' . $row['roll'] . '</td>
 		<td>' . $row['name'] . '</td>
+		<td>' . $row['year'] . '</td>
 		<td>' . $row['gender'] . '</td>
 		<td>' . $row['dept'] . '</td>
 		<td>' . $row['fname'] . '</td>
 		<td>' . $row['mname'] . '</td>
 		<td>' . $row['acat'] . '</td>
 		<td>' . $row['ocat'] . '</td>
+		<td>' . $row['domicile'] . '</td>
 		<td>' . $row['dob'] . '</td>
 		<td>' . $row['alotrank'] . '</td>
 		<td>' . $row['gmr'] . '</td>

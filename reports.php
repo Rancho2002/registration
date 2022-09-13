@@ -59,6 +59,11 @@ session_start();
           <option value="ST">ST</option>
           <option value="OBC-A">OBC-A</option>
           <option value="OBC-B">OBC-B</option>
+          <option value="pwd-GEN">pwd-GEN</option>
+          <option value="pwd-SC">pwd-SC</option>
+          <option value="pwd-ST">pwd-ST</option>
+          <option value="pwd-OBC-A">pwd-OBC-A</option>
+          <option value="pwd-OBC-B">pwd-OBC-B</option>
         </select>
         </div>
         <div class="text-center mt-4">

@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $ocat = $_POST['ocat'];
   $domicile = $_POST['domicile'];
   $dob = $_POST['dob'];
+  $year = date('Y');
   $alotrank = $_POST['alotrank'];
   $gmr = $_POST['gmr'];
   // $doa = $_POST['doa'];
@@ -24,15 +25,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $mail = $_POST['mail'];
   $fsbi = $_POST['fsbi'];
   $fcbi = $_POST['fcbi'];
+  $pwd=$_POST['pwd'];
+ 
 
   $date=date('Y-m-d H:i:s');
+
+  if($pwd=="yes"){
+    $ocat="pwd-"."$ocat";
+    $acat="pwd-"."$acat";
+  }
 
   $total=mysqli_query($conn,"SELECT * FROM `registration`");
   $roll=mysqli_num_rows($total);
   $roll++;
 
   $newRoll = '350/' . date("Y") . '/' . $dept . '/' . $roll;
-  $sql = "INSERT INTO `registration` (`roll`, `name`,`gender`, `dept`, `fname`, `mname`, `acat`, `ocat`, `dob`, `alotrank`, `gmr`, `doa`, `mob`, `gmob`, `address`, `aadhar`, `mail`, `fsbi`, `fcbi`) VALUES ( '$newRoll', '$name', '$gender','$dept', '$fname', '$mname', '$acat', '$ocat', '$dob', '$alotrank', '$gmr', '$date', '$mob', '$gmob', '$address', '$aadhar', '$mail', '$fsbi', '$fcbi')";
+  $sql = "INSERT INTO `registration` (`roll`,`year`, `name`,`gender`, `dept`, `fname`, `mname`, `acat`, `ocat`, `domicile`, `dob`, `alotrank`, `gmr`, `doa`, `mob`, `gmob`, `address`, `aadhar`, `mail`, `fsbi`, `fcbi`) VALUES ( '$newRoll','$year', '$name', '$gender','$dept', '$fname', '$mname', '$acat', '$ocat','$domicile', '$dob', '$alotrank', '$gmr', '$date', '$mob', '$gmob', '$address', '$aadhar', '$mail', '$fsbi', '$fcbi')";
 
   $result = mysqli_query($conn, $sql);
 
@@ -65,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 
   echo '
+
   <form id="regForm" action="/registration/registrationForm/index.php/" method="POST" class="bg-dark text-white container my-3 needs-validation" novalidate>
 
   <h1 class="text-center">Student Admission</h1>
@@ -75,9 +84,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 
       <label for="name">Name</label>
       <input class="form-control my-1" placeholder="Name" name="name" minlength="6" required>
-      <div class="valid-feedback">
+      
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid name
       </div>
@@ -92,12 +102,13 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         <option value="M">M</option>
         <option value="F">F</option>
       </select>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div> -->
       <div class="invalid-feedback">
-        Please provide a valid gender
-      </div>
+        Please provide a valid selection
+      </div> 
+      
 
       <label for="department" class="my-1">Department</label>
       <select class="custom-select form-control my-1" id="dept" name="dept" required>
@@ -108,44 +119,55 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         <option value="EE">EE</option>
         <option value="CE">CE</option>
       </select>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid department
-      </div>
+      </div> 
 
       <label for="father name" class="my-1">Father\'s Name</label>
       <input class="form-control my-1" placeholder="Father\'s Name" minlength="6" name="fname" required>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid name
       </div>
 
       <label for="mother name" class="my-1">Mother\'s Name</label>
       <input class="form-control my-1" placeholder="Mother\'s Name" minlength="6" name="mname" required>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid name
-      </div>
+      </div> 
 
       <label for="date of birth" class="my-1">Date of Birth</label>
-      <input class="form-control my-1" type="date" placeholder="Date of birth" name="dob" required>
-      <div class="valid-feedback">
+      <input class="form-control my-1" type="date" placeholder="Date of birth" name="dob" max="'.strval(date('Y')-17).'-12-30" required>
+   
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div> -->
       <div class="invalid-feedback">
         Please provide a valid date of birth
-      </div>
+      </div> 
 
+     
 
     </div>
 
-   
+    <label for="pwd" class="my-1 mt-2">PWD</label>
+    <div class="custom-control custom-radio">
+  <input type="radio" class="custom-control-input" id="customControlValidation2" name="pwd" value="yes" required>
+  <label class="custom-control-label" for="customControlValidation2">Yes</label>
+    </div>
+  <div class="custom-control custom-radio mb-3">
+  <input type="radio" class="custom-control-input" id="customControlValidation3" name="pwd" value="no" required>
+  <label class="custom-control-label" for="customControlValidation3">No</label>
+  <div class="invalid-feedback">This field must be selected</div>
+</div>
 
       <label for="alloted category" class="my-1">Alloted Category</label>
       <select class="custom-select form-control my-1" id="acat" name="acat" required>
@@ -158,23 +180,14 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         <option value="TFW">TFW</option>
         <option value="DEFENCE">DEFENCE</option>
       </select>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid category
       </div>
 
-      <label for="pwd" class="my-1 mt-2">PWD</label>
-      <div class="custom-control custom-radio">
-    <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" value="yes" required>
-    <label class="custom-control-label" for="customControlValidation2">Yes</label>
-  </div>
-  <div class="custom-control custom-radio mb-3">
-    <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" value="no" required>
-    <label class="custom-control-label" for="customControlValidation3">No</label>
-    <div class="invalid-feedback">This field must be selected</div>
-  </div>
+      
 
 
 
@@ -187,12 +200,12 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         <option value="OBC-A">OBC-A</option>
         <option value="OBC-B">OBC-B</option>
       </select>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid category
-      </div>
+      </div> 
 
       <label for="original category" class="my-1 needs-validation">Domicile</label>
       <select class="custom-select form-control my-1" id="domicile" name="domicile" required>
@@ -200,29 +213,48 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         <option value="West Bengal">West Bengal</option>
         <option value="Outside">Outside</option>
       </select>
-      <div class="valid-feedback">
+      <!-- <div class="valid-feedback">
         Looks good!
-      </div>
+      </div>-->
       <div class="invalid-feedback">
         Please provide a valid status
       </div>
 
       <label for="alloted rank" class="my-1">Alloted Rank</label>
       <input class="form-control my-1" type="number" placeholder="Alloted Rank" name="alotrank" required>
-   
+      <div class="invalid-feedback">
+      Please provide a valid rank
+    </div>
       <label for="gmr" class="my-1">General Merit Rank</label>
       <input class="form-control my-1" type="number" placeholder="General Merit Rank" name="gmr" required>
-     
+      <div class="invalid-feedback">
+      Please provide a valid rank
+    </div>
       <!-- <label for="date of admission" class="my-1">Date of Admission</label> -->
     </div>
 
     <div class="tab">
       <label for="contact info" class="my-2">Contact Info:</label>
       <input class="form-control my-3" type="email" placeholder="Email" name="mail" required>
-      <input class="form-control my-3" placeholder="phone" type="number" name="mob" required>
-      <input class="form-control my-3" placeholder="Guardian Phone" type="number" name="gmob" required>
+      <div class="invalid-feedback">
+        Please provide a valid email
+      </div>
+      <input class="form-control my-3" placeholder="phone" type="number" name="mob" minlength="10" required>
+      <div class="invalid-feedback">
+        Please provide a valid mobile no
+      </div>
+      <input class="form-control my-3" placeholder="Guardian Phone" type="number" name="gmob" minlength="10" required>
+      <div class="invalid-feedback">
+        Please provide a valid mobile no
+      </div>
       <input class="form-control my-3" placeholder="Address" name="address" required>
+      <div class="invalid-feedback">
+        Please provide a valid address
+      </div>
       <input class="form-control my-3" placeholder="Aadhar" type="number" minlength="12" name="aadhar" required>
+      <div class="invalid-feedback">
+        Please provide a valid aadhar no
+      </div>
       <label for="exampleInputEmail1" class="my-2">Admission Fees:</label>
       <input class="form-control my-3" type="number" placeholder="SBI" name="fsbi" required>
       <input class="form-control my-3" type="number" placeholder="CBI" name="fcbi" required>
@@ -264,7 +296,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 else{
   header("location: /registration/teacher.php/?status=notlogin");
 }
-?>
+?> 
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -284,6 +316,7 @@ else{
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
+          alert("All fields are required")
         }
         form.classList.add('was-validated');
       }, false);
