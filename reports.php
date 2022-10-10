@@ -4,7 +4,7 @@ session_start();
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Reports</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -71,6 +71,9 @@ session_start();
         </div>
       </form>
     </div>
+    <div class="container my-5">
+        <p class="p-2 border border-primary w-100 d-flex justify-content-between font-weight-bold text-success" style="font-size: 20px;">>> Generate reports by branch-wise:<a href="/registration/pdf/dptwise.php" class="btn btn-primary">Preview Report</a></p>
+      </div>
      ';
      
     }

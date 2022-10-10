@@ -46,7 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($result) {
     // header("location: /registration/registrationForm/");
-    echo '<h1 class="text-white">Data Inserted Successfully! <a href="/registration/reports.php/" class="btn btn-primary ml-1">Go To Reports</a></h1>';
+    echo '<h1 class="text-white">Data Inserted Successfully! <a href="/registration/reports.php/" class="btn btn-primary ml-1">Download Receipt</a></h1>';
+  }
+  else{
+    echo '<h1 class="text-danger">Failed to Insert Data. Try again!</h1>';
   }
 }
 ?>
@@ -63,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <!-- <link rel="stylesheet" href="style.css"> -->
-
+  <link rel="stylesheet" href="arrohid.css">
+  
   <title>Student Registration- RKMGEC</title>
 </head>
 
@@ -73,7 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 
   echo '
-
+  <div class="text-right pt-3 pr-3">
+  <a href="/registration/reports.php/" class="btn btn-primary ml-1">Go To Reports</a>
+  </div>
   <form id="regForm" action="/registration/registrationForm/index.php/" method="POST" class="bg-dark text-white container my-3 needs-validation" novalidate>
 
   <h1 class="text-center">Student Admission</h1>
@@ -171,8 +177,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 
       <label for="alloted category" class="my-1">Alloted Category</label>
       <select class="custom-select form-control my-1" id="acat" name="acat" required>
-      <!-- <option selected disabled value="">Choose...</option> -->
-        <option value="GEN" selected>GEN</option>
+       <option selected disabled value="">Choose...</option> 
+        <option value="GEN">GEN</option>
         <option value="SC">SC</option>
         <option value="ST">ST</option>
         <option value="OBC-A">OBC-A</option>
@@ -193,8 +199,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 
       <label for="original category" class="my-1 needs-validation">Original Category</label>
       <select class="custom-select form-control my-1" id="ocat" name="ocat" required>
-      <!--<option selected disabled value="">Choose...</option>-->
-        <option value="GEN" selected>GEN</option>
+        <option selected disabled value="">Choose...</option>
+        <option value="GEN">GEN</option>
         <option value="SC">SC</option>
         <option value="ST">ST</option>
         <option value="OBC-A">OBC-A</option>
@@ -207,9 +213,9 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
         Please provide a valid category
       </div> 
 
-      <label for="original category" class="my-1 needs-validation">Domicile</label>
+      <label for="domicile" class="my-1 needs-validation">Domicile</label>
       <select class="custom-select form-control my-1" id="domicile" name="domicile" required>
-        <!-- <option selected disabled value="">Choose...</option> -->
+         <option selected disabled value="">Choose...</option> 
         <option value="West Bengal">West Bengal</option>
         <option value="Outside">Outside</option>
       </select>
