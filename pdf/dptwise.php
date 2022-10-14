@@ -74,25 +74,17 @@ for($i=0;$i<count($branch);$i++){
 	<tbody>
 	
     <?php
-    // while($print<count($branch)){
-    //     echo '
-    //     <th scope="row">' . $branch[$print] . '</th>';
-    //     for($i=0;$i<count($gender);$i++){
-    //         echo '<td>' . $genCount[$i] . '</td>';
-    //     }  
-    //     for($i=0;$i<count($category);$i++){
-    //         echo '<td>' . $catCount[$i] . '</td>';
-    //     }
-    //     $print++;
-    // }
+
     echo '
     <tr>
     <th scope="">CSE</th>
     ';
-    for($i=0;$i<2;$i++){
-                echo '<td>' . $genCount[$i] . '</td>';
-    }
+    for($i=0;$i<2;$i++)
+        echo '<td>' . $genCount[$i] . '</td>';
+    
+
     echo '<div style="margin: auto;"><td rowspan="6" style="vertical-align : middle;text-align:center;font-size:20px;font-weight:700;">Category wise divison</td></div>';
+
     for($i=0;$i<10;$i++){
             echo '<td>' . $catCount[$i] . '</td>';
     }
