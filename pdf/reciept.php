@@ -26,12 +26,14 @@ $mail = $list['mail'];
 $fsbi = $list['fsbi'];
 $fcbi = $list['fcbi'];
 ?>
+<?php
 
+echo '
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title><?php echo "Reciept : " . $roll ?></title>
+    <title>Reciept : ' . $roll .'</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,13 +49,13 @@ $fcbi = $list['fcbi'];
                     <p class="my-5 mx-5 text-center" style="font-size: 30px;">Ramkrishna Mahato Government Engineering College</p>
                     <div class="row">
                         <ul class="list-unstyled">
-                            <li class="text-black">Name: <?php echo $name ."  (". $gender ?>)</li>
-                            <li class="mt-3"><span class="text-black">Department: </span><?php echo $dept ?></li>
-                            <li class="text-black my-3">Email: <?php echo $mail ?></li>
+                            <li class="text-black">Name: '.$name .'  ('. $gender.')</li>
+                            <li class="mt-3"><span class="text-black">Department: </span>'.$dept.'</li>
+                            <li class="text-black my-3">Email: '.$mail.'</li>
                             <div >
-                            <p>Original Category: <?php echo $ocat ?></p>
-                            <p>Alloted Category: <?php echo $acat ?></p>
-                            </div>  
+                            <p>Original Category: '.$ocat.'</p>
+                            <p>Alloted Category: '.$acat.'</p>
+                            </div>  ' ; ?>
                         </ul>
                         <hr>
                         <div class="d-flex justify-content-end">

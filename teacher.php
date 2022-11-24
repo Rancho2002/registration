@@ -80,7 +80,7 @@ if(isset($_GET['login'])){
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
-
+                <small>username are not case sensitive</small>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
