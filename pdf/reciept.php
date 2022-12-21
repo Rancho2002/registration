@@ -28,7 +28,7 @@ $fcbi = $list['fcbi'];
 ?>
 <?php
 
-echo '
+$html= '
 <!doctype html>
 <html lang="en">
 
@@ -55,30 +55,30 @@ echo '
                             <div >
                             <p>Original Category: '.$ocat.'</p>
                             <p>Alloted Category: '.$acat.'</p>
-                            </div>  ' ; ?>
+                            </div>  
                         </ul>
                         <hr>
                         <div class="d-flex justify-content-end">
-                            <p>Address: <?php echo $address ?></p>
+                            <p>Address: '.$address.'</p>
                         </div>
                         <div class="text-right" style="margin-top: 90px;">
-                        <p class="text-info">Date of Admission: <?php echo $doa ?></p>
-                        <p> Date of birth: <?php echo $dob ?>, Domicile: <?php echo $domicile ?></p>
+                        <p class="text-info">Date of Admission: '. $doa.'</p>
+                        <p> Date of birth: '. $dob.', Domicile: '. $domicile.'</p>
                     </div>
                         <hr>
                     </div>
                      <ul class="list-unstyled">
-                            <li class="text-black">Phone: <?php echo $mob ?></li>
-                            <li class="mt-3"><span class="text-black">Guardian Phone: </span><?php echo $gmob ?></li>
-                            <li class="text-black mt-3">General Merit Rank: <?php echo $gmr ?></li>
-                            <li class="text-black mt-3">Alloted Rank: <?php echo $alotrank ?></li>
+                            <li class="text-black">Phone: '. $mob.'</li>
+                            <li class="mt-3"><span class="text-black">Guardian Phone: </span>'. $gmob.'</li>
+                            <li class="text-black mt-3">General Merit Rank: '. $gmr .'</li>
+                            <li class="text-black mt-3">Alloted Rank: '. $alotrank.'</li>
                         </ul>
                     <div class="row">
                         <div class="col-xl-10">
                             <p>Fees(SBI)</p>
                         </div>
                         <div class="col-xl-2">
-                            <p class="float-end"><?php echo "₹".$fsbi ?>
+                            <p class="float-end">'. "₹".$fsbi.'
                             </p>
                         </div>
                         <hr>
@@ -88,7 +88,7 @@ echo '
                             <p>Fees(CBI)</p>
                         </div>
                         <div class="col-xl-2">
-                            <p class="float-end"><?php echo "₹".$fcbi ?>
+                            <p class="float-end">'. "₹".$fcbi.'
                             </p>
                         </div>
                         <hr style="border: 2px solid black;">
@@ -96,7 +96,7 @@ echo '
                     <div class="row text-black">
 
                         <div class="col-xl-12">
-                            <p class="float-end fw-bold">Total: <?php echo "₹".$fcbi+$fsbi ?>
+                            <p class="float-end fw-bold">Total: '. "₹".$fcbi+$fsbi.'
                             </p>
                         </div>
                         <hr style="border: 2px solid black;">
@@ -114,4 +114,6 @@ echo '
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
-</html>
+</html>';
+
+echo $html;
