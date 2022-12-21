@@ -1,9 +1,13 @@
 <?php
 include "../parts/_dbconnect.php";
+require 'vendor/autoload.php';
+
 $roll = $_GET['roll'];
 $result = mysqli_query($conn, "SELECT * from `registration` where `roll`='$roll'");
 $list = mysqli_fetch_assoc($result);
 
+
+// echo $filename;
 
 $name = $list['name'];
 $year = $list['year'];
@@ -78,7 +82,7 @@ $html= '
                             <p>Fees(SBI)</p>
                         </div>
                         <div class="col-xl-2">
-                            <p class="float-end">'. "₹".$fsbi.'
+                            <p class="float-end">'. "Rs. ".$fsbi.'
                             </p>
                         </div>
                         <hr>
@@ -88,7 +92,7 @@ $html= '
                             <p>Fees(CBI)</p>
                         </div>
                         <div class="col-xl-2">
-                            <p class="float-end">'. "₹".$fcbi.'
+                            <p class="float-end">'. "Rs. ".$fcbi.'
                             </p>
                         </div>
                         <hr style="border: 2px solid black;">
@@ -96,7 +100,7 @@ $html= '
                     <div class="row text-black">
 
                         <div class="col-xl-12">
-                            <p class="float-end fw-bold">Total: '. "₹".$fcbi+$fsbi.'
+                            <p class="float-end fw-bold">Total: '. "Rs. ".$fcbi+$fsbi.'
                             </p>
                         </div>
                         <hr style="border: 2px solid black;">
@@ -116,4 +120,18 @@ $html= '
 
 </html>';
 
-echo $html;
+$dompdf = new Dompdf\Dompdf();
+$dompdf->loadHtml($html);
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'portrait');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+//file name
+$filename="35000121".$roll[-2].$roll[-1];
+
+$file = $filename.'.pdf';
+// Output the generated PDF to Browser
+$dompdf->stream($file);
