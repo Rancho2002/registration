@@ -1,8 +1,4 @@
-# Visit HomePage HERE
-https://rancho2002.github.io/student_registration_rkmgec/
+# Full Video Demo
 
-# Visit Registration Form HERE
-https://rancho2002.github.io/student_registration_rkmgec/registrationForm/
+https://user-images.githubusercontent.com/92109154/209123234-560e49ba-e54b-4c69-92f0-e5215b453a29.mp4
 
-# Visit OTP Form HERE
-https://rancho2002.github.io/student_registration_rkmgec/otp.html/
