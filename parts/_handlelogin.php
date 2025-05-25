@@ -27,7 +27,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         }
     }
     else{
-        header("location: /registration/teacher.php/?login=wrong");
+        // Default teacher login if no record exists
+        if($user=="teacher" && $pass=="teacher123"){
+            session_start();
+            $_SESSION['loggedin']=true;
+            $_SESSION['username']=$user;
+            header("location: /registration/teacher.php/?user=".$user."&login=true");
+        }
+        else{
+            header("location: /registration/teacher.php/?login=wrong");
+        }
     }
 }
 
